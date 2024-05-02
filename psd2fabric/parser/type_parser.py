@@ -16,17 +16,29 @@ def parse(layer: TypeLayer, relate_x, relate_y):
     for length, style, paragraph in zip(runlength, rundata, paragraph_rundata):
         # just use the first one
         # substring = text[index:index + length]
-        stylesheet = style['StyleSheet']['StyleSheetData']
+       stylesheet = style['StyleSheet']['StyleSheetData']
         paragraphsheet = paragraph['ParagraphSheet']['Properties']
         if 'Font' in stylesheet:
             fontType = stylesheet['Font']
         else:
             fontType = styleSheetSet[index]['StyleSheetData']['Font']
 
-        font_size = stylesheet['FontSize']
+        if 'FontSize' in stylesheet:
+            font_size = stylesheet['FontSize']
+        else:
+            font_size = styleSheetSet[index]['StyleSheetData']['FontSize']
+
         font_size = round(get_size(font_size, layer.transform), 2)
-        font_name = fontset[fontType]['Name']
-        font_color = get_color(stylesheet['FillColor']['Values'])
+
+        if 'Name' in fontset[fontType]:
+            font_name = fontset[fontType]['Name']
+        else:
+            font_name = "Microsoft YaHei UI"
+
+        if 'FillColor' in stylesheet:
+            font_color = get_color(stylesheet['FillColor']['Values'])
+        else:
+            font_color =get_color(styleSheetSet[index]['StyleSheetData']["FillColor"]["Values"])
         break
 
     tlayer = TextFabricLayer(layer.name, layer.left - relate_x, layer.top - relate_y, layer.width, layer.height)
