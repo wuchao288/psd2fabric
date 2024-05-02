@@ -54,3 +54,6 @@ Replace input.psd with the path to your PSD file and output.json with the desire
 ## Contributing
 
 We welcome and appreciate your contributions! Please refer to the contribution guidelines for more details.
+
+## Bug
+24/05/02 解决中文乱码和文字层部分属性没有时不能处理的问题
