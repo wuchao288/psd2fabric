@@ -16,7 +16,7 @@ def render_json(obj: Fabric):
 
 def dump_json_file(obj, file):
     content = render_json(obj)
-    with open(file, 'w') as file:
+    with open(file, 'w',encoding='utf-8') as file:
         # 将字符串写入文件
         file.write(content)
 
