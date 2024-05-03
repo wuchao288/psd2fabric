@@ -1,3 +1,8 @@
+## 优化
+24/05/02 解决中文乱码和文字层部分属性没有时不能处理的问题
+
+24/05/03 多行文本计算行高，json格式支持fabricjs 6.0
+
 # PSD2Fabric
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -55,7 +60,4 @@ Replace input.psd with the path to your PSD file and output.json with the desire
 
 We welcome and appreciate your contributions! Please refer to the contribution guidelines for more details.
 
-## Bug
-24/05/02 解决中文乱码和文字层部分属性没有时不能处理的问题
 
-24/05/03 多行文本计算行高，json格式支持fabricjs 6.0
