@@ -4,7 +4,7 @@ from psd2fabric.fabric import FabricLayer
 class TextFabricLayer(FabricLayer):
     def __init__(self, name, left, top, width, height):
         # 调用父类的构造方法
-        super().__init__(name, "i-text", left, top, width, height)
+        super().__init__(name, "IText", left, top, width, height)
         self.pathAlign = None
         self.pathSide = None
         self.pathStartOffset = None
@@ -22,7 +22,7 @@ class TextFabricLayer(FabricLayer):
         self.fontSize = None
         self.fontFamily = None
 
-    def set_text(self, font_family, font_size, font_color, text_bold, text_align, text):
+    def set_text(self, font_family, font_size, font_color, text_bold, text_align, text,lineHeight):
         self.fill = font_color
         self.fontFamily = font_family
         self.fontSize = font_size
@@ -37,7 +37,7 @@ class TextFabricLayer(FabricLayer):
         self.linethrough = False
         self.textAlign = text_align
         self.fontStyle = "normal"
-        self.lineHeight = 0.86
+        self.lineHeight =lineHeight
         self.textBackgroundColor = ""
         self.charSpacing = 0
         self.styles = []
