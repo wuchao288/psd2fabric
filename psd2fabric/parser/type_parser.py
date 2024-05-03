@@ -13,6 +13,7 @@ def parse(layer: TypeLayer, relate_x, relate_y):
     paragraph_rundata = engineDict['ParagraphRun']['RunArray']
     writingDirection = engineDict["Rendered"]["Shapes"]["WritingDirection"]
     index = 0
+    lineHeight=0.86   
     for length, style, paragraph in zip(runlength, rundata, paragraph_rundata):
         # just use the first one
         # substring = text[index:index + length]
@@ -29,7 +30,11 @@ def parse(layer: TypeLayer, relate_x, relate_y):
             font_size = styleSheetSet[index]['StyleSheetData']['FontSize']
 
         font_size = round(get_size(font_size, layer.transform), 2)
-
+        
+        if "Leading" in stylesheet and stylesheet["Leading"]>0:
+             lineHeight=stylesheet["Leading"]
+             lineHeight=(lineHeight/font_size)
+            
         if 'Name' in fontset[fontType]:
             font_name = fontset[fontType]['Name']
         else:
@@ -50,7 +55,8 @@ def parse(layer: TypeLayer, relate_x, relate_y):
         get_bold(stylesheet),
         get_align(paragraphsheet),
         # writingDirection = 2 表明是竖版字，使用换行符实现竖版字
-        text if writingDirection != 2 else "\n".join(list(text.replace("\n", "")))
+        text if writingDirection != 2 else "\n".join(list(text.replace("\n", ""))),
+        lineHeight
     )
     return tlayer
 
