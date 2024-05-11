@@ -7,6 +7,7 @@ from psd2fabric.parser import type_parser, image_parser
 from psd2fabric.parser.effects.coloroverlay_parser import coloroverlay_parse
 from psd2fabric.parser.effects.stroke_parser import stroke_parse
 
+import json
 
 def parse_layers(psd_layers: list, relate_x, relate_y) -> list:
     res = []
@@ -25,6 +26,8 @@ def parse_layers(psd_layers: list, relate_x, relate_y) -> list:
             fabric_layer.add(children)
             common_parse(layer, fabric_layer)
         elif layer.kind == 'type':
+
+
             fabric_layer = type_parser.parse(layer, relate_x, relate_y)
             common_parse(layer, fabric_layer)
         else:
@@ -40,7 +43,9 @@ def parse_layers(psd_layers: list, relate_x, relate_y) -> list:
 def psd_to_fabric(psd):
     layers = parse_layers(psd._layers, 0, 0)
     viewbox = psd.viewbox
+  
     fb = Fabric(layers, viewbox[0], viewbox[1], viewbox[2] - viewbox[0], viewbox[3] - viewbox[1])
+
     return fb
 
 

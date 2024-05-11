@@ -3,8 +3,8 @@ import uuid
 
 class FabricLayer:
     def __init__(self, name, type, left, top, width, height):
+     
         self.type = type
-        self.version = "5.3.0"
         self.originX = "left"
         self.originY = "top"
         self.left = left
@@ -33,11 +33,34 @@ class FabricLayer:
 
 class Fabric:
     def __init__(self, objs, left, top, width, height):
-        self.version = "5.3.0"
-        self.objects = []
+     
+        self.id:str=str(uuid.uuid4()),
+        self.width:int= width,
+        self.height:int= height,
+        self.zoom:int=1,
+        self.objects = [
+            {
+                "id": "WorkSpaceDrawType",
+                "name": "rect",
+                "fill": "",
+                "selectable": False,
+                "evented": False,
+                "lockMovementX": False,
+                "lockMovementY": False,
+                "objectCaching": True,
+                "transparentCorners": False,
+                "hasBorders": True,
+                "type": "Rect",
+                "originX": "left",
+                "originY": "top",
+                "left": 0,
+                "top": 0,
+                "width": width,
+                "height": height
+                }
+        ]
         self.clipPath = {
             "type": "rect",
-            "version": "5.3.0",
             "originX": "left",
             "originY": "top",
             "left": left,
@@ -46,22 +69,16 @@ class Fabric:
             "height": height
         }
 
-        workspace = {
-            "type": "rect",
-            "version": "5.3.0",
-            "originX": "left",
-            "originY": "top",
-            "left": left,
-            "top": top,
-            "width": width,
-            "height": height,
-            "fill": "#FC7245",
-            "id": "workspace",
-            "selectable": False,
-            "hasControls": False
+        self.workSpace = {
+            "fillType": 0,
+            "left": 0,
+            "top": 0,
+            "angle": 0,
+            "scaleX": 1,
+            "scaleY": 1
         }
 
-        self.objects.append(workspace)
+        #self.objects.append(workspace)
         for obj in objs:
             # print(obj)
             self.objects.append(obj)
